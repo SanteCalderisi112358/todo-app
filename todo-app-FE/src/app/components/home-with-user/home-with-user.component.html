@@ -1,1 +1,21 @@
-<p>home-with-user works!</p>
+<div>
+  <div class="row">
+    <div class="col-xs-12 col-12 col-md-4 form-group">
+       <input class="input-getDate"  type="text"
+          placeholder="Datepicker"
+          class="form-control"
+          bsDatepicker
+          [bsConfig]="{ isAnimated: true, dateInputFormat: 'YYYY-MM-DD' }"
+          [(ngModel)]="selectedDate">
+          <button class="btn-getDate" (click)="getDate($event)">Aggiungi!</button>
+    </div>
+    <!-- <div class="col-xs-12 col-12 col-md-4 form-group">
+       <input type="text"
+          placeholder="Daterangepicker"
+          class="form-control"
+          bsDaterangepicker
+
+          [bsConfig]="{ isAnimated: true }">
+    </div> -->
+ </div>
+</div>

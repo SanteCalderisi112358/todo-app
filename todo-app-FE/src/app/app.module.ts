@@ -8,7 +8,10 @@ import { HomeWithUserComponent } from './components/home-with-user/home-with-use
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import {RouterModule, Routes } from '@angular/router';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { BsDatepickerModule, BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
+import { FormsModule } from '@angular/forms';
 const routes:Routes =[
  {
   path: 'home-no-user',
@@ -36,13 +39,18 @@ const routes:Routes =[
     HomeNoUserComponent,
     HomeWithUserComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    BrowserAnimationsModule,
+    TooltipModule.forRoot(),
+    BsDatepickerModule.forRoot(),
+    FormsModule
   ],
-  providers: [],
+  providers: [BsDatepickerConfig],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
