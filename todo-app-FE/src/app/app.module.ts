@@ -2,13 +2,45 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { HomeNoUserComponent } from './components/home-no-user/home-no-user.component';
+import { HomeWithUserComponent } from './components/home-with-user/home-with-user.component';
+import { LoginComponent } from './auth/login/login.component';
+import { RegisterComponent } from './auth/register/register.component';
+import {RouterModule, Routes } from '@angular/router';
 
+const routes:Routes =[
+ {
+  path: 'home-no-user',
+  component:HomeNoUserComponent,
+ },
+ {
+  path: 'home-with-user',
+  component:HomeWithUserComponent,
+ },
+ {
+  path: 'login',
+  component:LoginComponent,
+ },
+ {
+  path: 'register',
+  component:RegisterComponent,
+ },
+
+
+]
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NavbarComponent,
+    HomeNoUserComponent,
+    HomeWithUserComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    RouterModule.forRoot(routes)
   ],
   providers: [],
   bootstrap: [AppComponent]
