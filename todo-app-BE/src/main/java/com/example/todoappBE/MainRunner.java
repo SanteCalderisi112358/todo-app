@@ -1,14 +1,11 @@
 package com.example.todoappBE;
 
-import java.util.List;
 import java.util.Locale;
-import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-import com.example.todoappBE.entities.Todo;
 import com.example.todoappBE.services.TodoService;
 import com.example.todoappBE.services.UserService;
 import com.github.javafaker.Faker;
@@ -36,14 +33,14 @@ public class MainRunner implements CommandLineRunner {
 //				faker.crypto().md5());
 //		userSrv.createUser(faker.name().firstName(), faker.name().lastName(), faker.internet().emailAddress(),
 //				faker.crypto().md5());
-
-//		System.err.println(user);
+//		List<User> allUser = userSrv.getAllUser();
+//		User user = allUser.get(0);
 //		todoSrv.createTodo("Pisciare", 2, new Date(), false, new Date(), user);
 //		todoSrv.createTodo("Cacare", 1, new Date(), false, new Date(), user);
 //		todoSrv.createTodo("Cucinare", 3, new Date(), false, new Date(), user);
 //		todoSrv.createTodo("Morire", 2, new Date(), false, new Date(), user);
-		List<Todo> allUsersOf = todoSrv.getTodosByIdUser(UUID.fromString("c671c2da-3f6f-4079-838e-84b94b659471"));
-		allUsersOf.forEach(t -> System.err.println(t));
+//		List<Todo> allUsersOf = todoSrv.getTodosByIdUser(UUID.fromString("c671c2da-3f6f-4079-838e-84b94b659471"));
+//		allUsersOf.forEach(t -> System.err.println(t));
 
 	}
 
