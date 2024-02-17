@@ -28,9 +28,12 @@ public class TodoService {
 	}
 	
 	public Todo updateTodo(UUID idTodo, String newDescription, int newPriority, Date newDeadline,
-			boolean newCompleted) {
+			boolean newCompleted, UUID idUser) {
 		Optional<Todo> todoOptional = todoRepo.findById(idTodo);
 		Todo todo = todoOptional.orElseThrow(() -> new TodoNotFoundException("Todo non trovato per l'id: " + idTodo));
+		if (!todo.getUser().getId().equals(idUser)) {
+			throw new TodoNotFoundException("Non sei autorizzato!");
+		}
 		todo.setCompleted(newCompleted);
 		todo.setDeadline(newDeadline);
 		todo.setDescription(newDescription);
@@ -39,6 +42,14 @@ public class TodoService {
 
 	}
 	
+	public void deleTodo(UUID idTodo, UUID idUser) {
+		Optional<Todo> todoOptional = todoRepo.findById(idTodo);
+		Todo todo = todoOptional.orElseThrow(() -> new TodoNotFoundException("Todo non trovato per l'id: " + idTodo));
+		if (!todo.getUser().getId().equals(idUser)) {
+			throw new TodoNotFoundException("Non sei autorizzato!");
+		}
+		todoRepo.delete(todo);
+	}
 
 
 }

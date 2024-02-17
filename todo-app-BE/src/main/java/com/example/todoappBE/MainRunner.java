@@ -1,6 +1,5 @@
 package com.example.todoappBE;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
@@ -39,8 +38,11 @@ public class MainRunner implements CommandLineRunner {
 		User user = allUser.get(0);
 		System.err.println(user);
 //		todoSrv.createTodo("Andare dal commercialista", 2, new Date(), false, new Date(), user);
-		todoSrv.updateTodo(UUID.fromString("fd61c6dd-9bf5-4fe8-a88d-1164dad13aa3"), "Andare dal medico", 200,
-				new Date(), false);
+//		todoSrv.updateTodo(UUID.fromString("c458e629-dce6-4f64-a49c-2c6d1ad94bed"), "Cacare", 200,
+//				new Date(), false, user.getId());
+
+		todoSrv.deleTodo(UUID.fromString("fd61c6dd-9bf5-4fe8-a88d-1164dad13aa3"), user.getId());
+
 	}
 
 }
