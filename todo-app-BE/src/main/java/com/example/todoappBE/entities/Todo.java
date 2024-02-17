@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @NoArgsConstructor
-@Table(name = "todo list")
+@Table(name = "todo_list")
 public class Todo {
 	@Id
 	@GeneratedValue

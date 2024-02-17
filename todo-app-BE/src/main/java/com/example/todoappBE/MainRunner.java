@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-import com.example.todoappBE.entities.User;
+import com.example.todoappBE.entities.Todo;
 import com.example.todoappBE.services.TodoService;
 import com.example.todoappBE.services.UserService;
 import com.github.javafaker.Faker;
@@ -30,18 +30,20 @@ public class MainRunner implements CommandLineRunner {
 //		System.out.println(user);
 //		userSrv.createUser(user.getName(), user.getLast_name(), user.getEmail(), user.getPassword());
 //	}
-		List<User> allUser = userSrv.getAllUser();
-//		allUser.forEach(user -> System.err.println(user));
+//		userSrv.createUser(faker.name().firstName(), faker.name().lastName(), faker.internet().emailAddress(),
+//				faker.crypto().md5());
+//		userSrv.createUser(faker.name().firstName(), faker.name().lastName(), faker.internet().emailAddress(),
+//				faker.crypto().md5());
+//		userSrv.createUser(faker.name().firstName(), faker.name().lastName(), faker.internet().emailAddress(),
+//				faker.crypto().md5());
 
-//		todoSrv.createTodo("Andare dal dermatologo", 2, new Date(), false, new Date(), allUser.get(3));
-
-		User user = allUser.get(0);
-		System.err.println(user);
-//		todoSrv.createTodo("Andare dal commercialista", 2, new Date(), false, new Date(), user);
-//		todoSrv.updateTodo(UUID.fromString("c458e629-dce6-4f64-a49c-2c6d1ad94bed"), "Cacare", 200,
-//				new Date(), false, user.getId());
-
-		todoSrv.deleTodo(UUID.fromString("fd61c6dd-9bf5-4fe8-a88d-1164dad13aa3"), user.getId());
+//		System.err.println(user);
+//		todoSrv.createTodo("Pisciare", 2, new Date(), false, new Date(), user);
+//		todoSrv.createTodo("Cacare", 1, new Date(), false, new Date(), user);
+//		todoSrv.createTodo("Cucinare", 3, new Date(), false, new Date(), user);
+//		todoSrv.createTodo("Morire", 2, new Date(), false, new Date(), user);
+		List<Todo> allUsersOf = todoSrv.getTodosByIdUser(UUID.fromString("c671c2da-3f6f-4079-838e-84b94b659471"));
+		allUsersOf.forEach(t -> System.err.println(t));
 
 	}
 

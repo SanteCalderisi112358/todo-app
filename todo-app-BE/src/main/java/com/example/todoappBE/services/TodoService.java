@@ -1,6 +1,7 @@
 package com.example.todoappBE.services;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -49,6 +50,15 @@ public class TodoService {
 			throw new TodoNotFoundException("Non sei autorizzato!");
 		}
 		todoRepo.delete(todo);
+	}
+
+	public List<Todo> getTodosByIdUser(UUID idUser) {
+		List<Todo> todos = todoRepo.getTodosByUserId(idUser);
+		todos.forEach(t -> {
+			if (!t.getUser().getId().equals(idUser))
+				throw new TodoNotFoundException("Non sei autorizzato!");
+		});
+		return todoRepo.getTodosByUserId(idUser);
 	}
 
 
