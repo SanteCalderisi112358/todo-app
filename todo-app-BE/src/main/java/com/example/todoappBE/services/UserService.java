@@ -1,5 +1,7 @@
 package com.example.todoappBE.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +29,10 @@ public class UserService {
 
 		// Salva il nuovo utente nel repository
 		return userRepo.save(newUser);
+	}
+
+	public List<User> getAllUser() {
+		return userRepo.findAll();
 	}
 
 }

@@ -2,10 +2,10 @@
   <div class="row">
     <div class="col-xs-12 col-12 col-md-4 form-group">
        <input class="input-getDate"  type="text"
-          placeholder="Datepicker"
+          placeholder="Seleziona una data"
           class="form-control"
           bsDatepicker
-          [bsConfig]="{ isAnimated: true, dateInputFormat: 'YYYY-MM-DD' }"
+          [bsConfig]="{ isAnimated: true, dateInputFormat: 'DD-MM-YYYY' }"
           [(ngModel)]="selectedDate">
           <button class="btn-getDate" (click)="getDate($event)">Aggiungi!</button>
     </div>
