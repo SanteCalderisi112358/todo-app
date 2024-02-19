@@ -55,4 +55,5 @@ public class UserService {
 		return userRepo.findById(id)
 				.orElseThrow(() -> new NotFoundException("L'utente con id: " + id + " non è stato trovato"));
 	}
+
 }

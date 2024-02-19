@@ -9,8 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.todoappBE.entities.Todo;
-import com.example.todoappBE.entities.User;
 import com.example.todoappBE.exceptions.TodoNotFoundException;
+import com.example.todoappBE.payloads.TodoRequestBody;
 import com.example.todoappBE.repositories.TodoRepository;
 
 @Service
@@ -22,9 +22,9 @@ public class TodoService {
 		this.todoRepo = todoRepo;
 	}
 
-	public Todo createTodo(String description, int priority, Date deadline, boolean completed, Date create_at,
-			User user) {
-		Todo newTodo = new Todo(description, priority, deadline, completed, create_at, user);
+	public Todo createTodo(TodoRequestBody body) {
+		Todo newTodo = new Todo(body.getDescription(), body.getPriority(), body.getDeadline(), body.isCompleted(),
+				body.getCreated_at(), body.getUser().getUser());
 		return todoRepo.save(newTodo);
 	}
 	
@@ -60,6 +60,5 @@ public class TodoService {
 		});
 		return todoRepo.getTodosByUserId(idUser);
 	}
-
 
 }

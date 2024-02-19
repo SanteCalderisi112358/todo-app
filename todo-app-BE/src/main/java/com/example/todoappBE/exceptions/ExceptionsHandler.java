@@ -31,6 +31,12 @@ public class ExceptionsHandler {
 		return new ErrorsPayload(e.getMessage(), new Date());
 	}
 
+	@ExceptionHandler(NoTokenException.class)
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
+	public ErrorsPayload handleNoToken(NoTokenException e) {
+		return new ErrorsPayload(e.getMessage(), new Date());
+	}
+
 	@ExceptionHandler(UnauthorizedException.class)
 	@ResponseStatus(HttpStatus.UNAUTHORIZED)
 	public ErrorsPayload handleUnauthorized(UnauthorizedException e) {

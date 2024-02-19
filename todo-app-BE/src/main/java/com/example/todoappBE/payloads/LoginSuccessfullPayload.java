@@ -11,5 +11,5 @@ import lombok.Setter;
 @Setter
 public class LoginSuccessfullPayload {
 	private String accessToken;
-	private User utente;
+	private User user;
 }

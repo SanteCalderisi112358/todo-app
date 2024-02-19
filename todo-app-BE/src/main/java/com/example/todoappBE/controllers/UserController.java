@@ -22,8 +22,5 @@ public class UserController {
 		return userSrv.find(page, size, sortBy);
 	}
 
-	@GetMapping("/prova")
-	public String getProva() {
-		return "Prova";
-	}
+
 }
