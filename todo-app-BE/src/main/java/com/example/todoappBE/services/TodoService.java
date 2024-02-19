@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.todoappBE.entities.Todo;
-import com.example.todoappBE.exceptions.TodoNotFoundException;
+import com.example.todoappBE.exceptions.NotFoundException;
 import com.example.todoappBE.payloads.TodoRequestBody;
 import com.example.todoappBE.repositories.TodoRepository;
 
@@ -31,10 +31,8 @@ public class TodoService {
 	public Todo updateTodo(UUID idTodo, String newDescription, int newPriority, Date newDeadline,
 			boolean newCompleted, UUID idUser) {
 		Optional<Todo> todoOptional = todoRepo.findById(idTodo);
-		Todo todo = todoOptional.orElseThrow(() -> new TodoNotFoundException("Todo non trovato per l'id: " + idTodo));
-		if (!todo.getUser().getId().equals(idUser)) {
-			throw new TodoNotFoundException("Non sei autorizzato!");
-		}
+		Todo todo = todoOptional.orElseThrow(() -> new NotFoundException("Todo non trovato per l'id: " + idTodo));
+
 		todo.setCompleted(newCompleted);
 		todo.setDeadline(newDeadline);
 		todo.setDescription(newDescription);
@@ -43,21 +41,14 @@ public class TodoService {
 
 	}
 	
-	public void deleTodo(UUID idTodo, UUID idUser) {
+	public void deleTodo(UUID idTodo, UUID idUser) throws NotFoundException {
 		Optional<Todo> todoOptional = todoRepo.findById(idTodo);
-		Todo todo = todoOptional.orElseThrow(() -> new TodoNotFoundException("Todo non trovato per l'id: " + idTodo));
-		if (!todo.getUser().getId().equals(idUser)) {
-			throw new TodoNotFoundException("Non sei autorizzato!");
-		}
+		Todo todo = todoOptional.orElseThrow(() -> new NotFoundException("Todo non trovato per l'id: " + idTodo));
 		todoRepo.delete(todo);
 	}
 
 	public List<Todo> getTodosByIdUser(UUID idUser) {
-		List<Todo> todos = todoRepo.getTodosByUserId(idUser);
-		todos.forEach(t -> {
-			if (!t.getUser().getId().equals(idUser))
-				throw new TodoNotFoundException("Non sei autorizzato!");
-		});
+
 		return todoRepo.getTodosByUserId(idUser);
 	}
 

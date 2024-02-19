@@ -6,6 +6,7 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,6 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.todoappBE.entities.Todo;
 import com.example.todoappBE.exceptions.BadRequestException;
+import com.example.todoappBE.exceptions.NoTokenException;
+import com.example.todoappBE.exceptions.NotFoundException;
 import com.example.todoappBE.exceptions.UnauthorizedException;
 import com.example.todoappBE.payloads.LoginSuccessfullPayload;
 import com.example.todoappBE.payloads.TodoRequestBody;
@@ -39,7 +42,7 @@ public class TodoController {
 
 	@GetMapping("/user={userId}")
 	public List<Todo> getTodosByUtente(@PathVariable UUID userId, @RequestBody @Validated LoginSuccessfullPayload body,
-			HttpServletRequest request) throws UnauthorizedException, BadRequestException {
+			HttpServletRequest request) throws UnauthorizedException, BadRequestException, NoTokenException {
 		try {
 			String authHeader = request.getHeader("Authorization");
 			String tokenInAuth = authHeader.substring(7);
@@ -62,8 +65,9 @@ public class TodoController {
 	}
 
 
-	@PostMapping
-	public Todo createTodo(@RequestBody @Validated TodoRequestBody body, HttpServletRequest request) {
+	@PostMapping("/userId={userId}")
+	public Todo createTodo(@RequestBody @Validated TodoRequestBody body, HttpServletRequest request,
+			@PathVariable UUID userId) {
 		try {
 			String token = body.getUser().getAccessToken();
 			String authHeader = request.getHeader("Authorization");
@@ -87,15 +91,42 @@ public class TodoController {
 		
 		
 	@PutMapping("userId={userId}/todoId={todoId}")
-	public String updateTodo(@PathVariable UUID todoId, @PathVariable UUID userId, @RequestBody TodoRequestBody body) {
-		return userId + " " + todoId;
+	public Todo updateTodo(@PathVariable UUID userId, @PathVariable UUID todoId,
+			@RequestBody @Validated TodoRequestBody body, HttpServletRequest request) throws UnauthorizedException {
+		try {
+			String token = body.getUser().getAccessToken();
+			String authHeader = request.getHeader("Authorization");
+			String tokenInAuth = authHeader.substring(7);
+
+			if (!token.equals(tokenInAuth))
+				throw new UnauthorizedException("Non sei autorizzato!");
+		String newDescription = body.getDescription();
+		int updatePriotiry = body.getPriority();
+		Date updateDeadline = body.getDeadline();
+		boolean updateCompleted = body.isCompleted();
+		UUID userIdPut = userId;
+		return todoSrv.updateTodo(todoId, newDescription, updatePriotiry, updateDeadline, updateCompleted, userIdPut);
+	} catch (UnauthorizedException e) {
+		throw new UnauthorizedException(e.getMessage());
 	}
 
-//	@DeleteMapping("/{donazioneId}")
-//	@ResponseStatus(HttpStatus.NO_CONTENT)
-//	@PreAuthorize("hasAuthority('ADMIN')")
-//	public void deleteDonazione(@PathVariable UUID donazioneId) {
-//		donazioneSrv.findByIdAndDelete(donazioneId);
-//	}
+	}
 
+	@DeleteMapping("userId={userId}/todoId={todoId}")
+	public void deleteTodo(@PathVariable UUID userId, @PathVariable UUID todoId,
+			@RequestBody @Validated TodoRequestBody body, HttpServletRequest request)
+			throws UnauthorizedException, NotFoundException {
+		try {
+			String token = body.getUser().getAccessToken();
+			String authHeader = request.getHeader("Authorization");
+			String tokenInAuth = authHeader.substring(7);
+
+			if (!token.equals(tokenInAuth))
+				throw new UnauthorizedException("Non sei autorizzato!");
+			todoSrv.deleTodo(todoId, userId);
+		} catch (UnauthorizedException e) {
+			throw new UnauthorizedException(e.getMessage());
+		}
+
+	}
 }

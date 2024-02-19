@@ -11,7 +11,7 @@ import org.springframework.util.AntPathMatcher;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.example.todoappBE.entities.User;
-import com.example.todoappBE.exceptions.UnauthorizedException;
+import com.example.todoappBE.exceptions.NoTokenException;
 import com.example.todoappBE.services.UserService;
 
 import jakarta.servlet.FilterChain;
@@ -29,12 +29,12 @@ public class JWTAuthFilter extends OncePerRequestFilter {
 
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
-			throws ServletException, IOException, UnauthorizedException {
+			throws ServletException, IOException, NoTokenException {
 		try {
 			String authHeader = request.getHeader("Authorization");
 
 			if (authHeader == null || !authHeader.startsWith("Bearer "))
-				throw new UnauthorizedException("Per favore passa il token nell'authorization header");
+				throw new NoTokenException("Per favore passa il token nell'authorization header");
 			String token = authHeader.substring(7);
 			System.err.println("TOKEN -------> " + token);
 			System.err.println("**********");
@@ -64,8 +64,8 @@ public class JWTAuthFilter extends OncePerRequestFilter {
 			filterChain.doFilter(request, response);
 
 			// 4. Se non è OK --> 401 ("Per favore effettua di nuovo il login")
-		} catch (UnauthorizedException e) {
-			throw new UnauthorizedException(e.getMessage());
+		} catch (NoTokenException e) {
+			throw new NoTokenException(e.getMessage());
 		}
 
 	}

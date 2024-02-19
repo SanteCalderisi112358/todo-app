@@ -26,4 +26,11 @@ public class TodoRequestBody {
 		this.deadline = deadline;
 		this.user = user;
 	}
+
+	@Override
+	public String toString() {
+		return "TodoRequestBody [description=" + description + ", priority=" + priority + ", deadline=" + deadline
+				+ ", completed=" + completed + ", created_at=" + created_at + ", user=" + user + "]";
+	}
+
 }

@@ -55,6 +55,7 @@ public class ExceptionsHandler {
 		return new ErrorsPayload(e.getMessage(), new Date());
 	}
 
+
 	@ExceptionHandler(Exception.class)
 	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
 	public ErrorsPayload handleGeneric(Exception e) {
