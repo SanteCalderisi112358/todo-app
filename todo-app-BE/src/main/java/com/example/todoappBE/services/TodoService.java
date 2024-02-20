@@ -52,4 +52,7 @@ public class TodoService {
 		return todoRepo.getTodosByUserId(idUser);
 	}
 
+	public Todo findTodoById(UUID userId, UUID todoId) throws NotFoundException {
+		return todoRepo.getTodoByTodoId(userId, todoId);
+	}
 }

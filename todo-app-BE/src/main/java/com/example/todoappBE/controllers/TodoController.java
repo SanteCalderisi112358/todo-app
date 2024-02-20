@@ -64,6 +64,11 @@ public class TodoController {
 		}
 	}
 
+	@GetMapping("/userId={userId}&todoId={todoId}")
+	public Todo getTodoById(@PathVariable UUID userId, @PathVariable UUID todoId, HttpServletRequest request) {
+
+		return todoSrv.findTodoById(userId, todoId);
+	}
 
 	@PostMapping("/userId={userId}")
 	public Todo createTodo(@RequestBody @Validated TodoRequestBody body, HttpServletRequest request,
@@ -90,7 +95,7 @@ public class TodoController {
 		
 		
 		
-	@PutMapping("userId={userId}/todoId={todoId}")
+	@PutMapping("userId={userId}&todoId={todoId}")
 	public Todo updateTodo(@PathVariable UUID userId, @PathVariable UUID todoId,
 			@RequestBody @Validated TodoRequestBody body, HttpServletRequest request) throws UnauthorizedException {
 		try {
@@ -112,7 +117,7 @@ public class TodoController {
 
 	}
 
-	@DeleteMapping("userId={userId}/todoId={todoId}")
+	@DeleteMapping("userId={userId}&todoId={todoId}")
 	public void deleteTodo(@PathVariable UUID userId, @PathVariable UUID todoId,
 			@RequestBody @Validated TodoRequestBody body, HttpServletRequest request)
 			throws UnauthorizedException, NotFoundException {
