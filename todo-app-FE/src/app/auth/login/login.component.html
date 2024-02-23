@@ -1,1 +1,28 @@
-<p>login works!</p>
+<form #loginform="ngForm" (ngSubmit)="access(loginform)">
+  <div class="form-group">
+    <label for="email">Indirizzo e-mail</label>
+    <input type="email" id="email" class="form-control" name="email" required ngModel>
+  </div>
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input type="password" id="password" name="password" class="form-control" required ngModel>
+  </div>
+  <button type="submit" [disabled]="loginform.invalid" class="btn btn-primary mb-3">Accedi</button>
+<!-- <div *ngIf="isLoading" class="d-flex justify-content-center mb-3">
+
+  <div class="spinner-grow text-warning spinner-grow-sm me-1" role="status">
+    <span class="visually-hidden"></span>
+  </div>
+  <div class="spinner-grow text-warning spinner-grow-sm me-1" role="status">
+    <span class="visually-hidden"></span>
+  </div>
+  <div class="spinner-grow text-warning spinner-grow-sm me-1" role="status">
+    <span class="visually-hidden"></span>
+  </div>
+</div>
+  <div *ngIf="erroreLogin" class="alert alert-danger">
+    <ul>
+      <li>{{ errore }}</li>
+    </ul>
+  </div> -->
+</form>

@@ -36,7 +36,7 @@ public class AuthController {
 		body.setPassword(bcrypt.encode(body.getPassword()));
 		// body.setCreditCard("1234123412341234");
 		User created = userSrv.createUser(body.getNome(), body.getCognome(), body.getEmail(), body.getPassword());
-
+		System.err.println("Nuova registrazione:" + created);
 		return created;
 	}
 
@@ -56,7 +56,7 @@ public class AuthController {
 
 				String token = jwtTools.createToken(user);
 				User utente = user;
-
+				// System.err.println(token);
 				LoginSuccessfullPayload loginAvvenuto = new LoginSuccessfullPayload(token, utente);
 				return new ResponseEntity<>(loginAvvenuto, HttpStatus.OK);
 

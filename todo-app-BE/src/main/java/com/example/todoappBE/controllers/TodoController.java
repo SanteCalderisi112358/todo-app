@@ -95,7 +95,7 @@ public class TodoController {
 		
 		
 		
-	@PutMapping("userId={userId}&todoId={todoId}")
+	@PutMapping("?userId={userId}&todoId={todoId}")
 	public Todo updateTodo(@PathVariable UUID userId, @PathVariable UUID todoId,
 			@RequestBody @Validated TodoRequestBody body, HttpServletRequest request) throws UnauthorizedException {
 		try {

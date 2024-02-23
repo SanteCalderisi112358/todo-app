@@ -12,6 +12,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { BsDatepickerModule, BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+
 const routes:Routes =[
  {
   path: 'home-no-user',
@@ -48,7 +50,9 @@ const routes:Routes =[
     BrowserAnimationsModule,
     TooltipModule.forRoot(),
     BsDatepickerModule.forRoot(),
-    FormsModule
+    FormsModule,
+    HttpClientModule,
+
   ],
   providers: [BsDatepickerConfig],
   bootstrap: [AppComponent]
