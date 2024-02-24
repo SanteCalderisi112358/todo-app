@@ -25,6 +25,8 @@ user!: AuthData|null
     })
   }
 
+
+
   logout(){
     this.autSrv.logout()
   }

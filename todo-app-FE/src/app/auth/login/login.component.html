@@ -1,4 +1,7 @@
-<form #loginform="ngForm" (ngSubmit)="access(loginform)">
+
+<section class="w-100 d-flex justify-content-center">
+  <div class="container-login">
+  <form #loginform="ngForm" (ngSubmit)="access(loginform)">
   <div class="form-group">
     <label for="email">Indirizzo e-mail</label>
     <input type="email" id="email" class="form-control" name="email" required ngModel>
@@ -7,8 +10,11 @@
     <label for="password">Password</label>
     <input type="password" id="password" name="password" class="form-control" required ngModel>
   </div>
-  <button type="submit" [disabled]="loginform.invalid" class="btn btn-primary mb-3">Accedi</button>
-<!-- <div *ngIf="isLoading" class="d-flex justify-content-center mb-3">
+  <div class="w-100 d-flex justify-content-center">
+      <button type="submit" [disabled]="loginform.invalid" class="btn btn-primary mb-3">Accedi</button>
+
+  </div>
+<div *ngIf="isLoading" class="d-flex justify-content-center mb-3">
 
   <div class="spinner-grow text-warning spinner-grow-sm me-1" role="status">
     <span class="visually-hidden"></span>
@@ -24,5 +30,9 @@
     <ul>
       <li>{{ errore }}</li>
     </ul>
-  </div> -->
+  </div>
 </form>
+</div>
+
+
+</section>

@@ -13,6 +13,10 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { BsDatepickerModule, BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TodosComponent } from './components/home-with-user/todos/todos.component';
+import { TodoComponent } from './components/home-with-user/todos/todo/todo.component';
+import { NewTodoComponent } from './components/home-with-user/new-todo/new-todo.component';
+import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 
 const routes:Routes =[
  {
@@ -42,6 +46,9 @@ const routes:Routes =[
     HomeWithUserComponent,
     LoginComponent,
     RegisterComponent,
+    TodosComponent,
+    TodoComponent,
+    NewTodoComponent,
 
   ],
   imports: [
@@ -52,6 +59,7 @@ const routes:Routes =[
     BsDatepickerModule.forRoot(),
     FormsModule,
     HttpClientModule,
+    TimepickerModule.forRoot()
 
   ],
   providers: [BsDatepickerConfig],

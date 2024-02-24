@@ -1,0 +1,20 @@
+.container-new-todo{
+  border: 2px solid red;
+  max-width: 450px;
+  padding: 20px 10px;
+  background-color: rgba(0,0,0,0.4);
+  border-radius: 20px;
+  box-shadow: 4px 4px 8px;
+  margin-bottom: 40px;
+}
+
+.form-label{
+  width: 100%;
+  text-align: center;
+}
+
+@media (max-width: 576px){
+  .container-new-todo{
+    width: 100%;
+  }
+}

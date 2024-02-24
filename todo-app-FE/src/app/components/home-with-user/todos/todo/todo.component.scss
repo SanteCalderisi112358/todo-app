@@ -1,0 +1,44 @@
+.container-todo{
+  border: 2px solid brown;
+  width: 80%;
+  padding: 10px 20px;
+  background-color: rgba(0,0,0,0.4);
+  border-radius: 20px;
+  box-shadow: 4px 4px 8px;
+  margin-bottom: 40px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  position: relative;
+}
+
+.created-at{
+  background-color: aliceblue;
+position: absolute;
+font-size: 15px;
+right: 0;
+transform: translateY(120%);
+padding: 5px 10px;
+margin: 0;
+clip-path: polygon(5% 0%, 100% 0%, 95% 100%, 0% 100%);
+}
+.container-todo div{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container-todo div p{
+  margin: 0;
+}
+
+@media(max-width:576px){
+  .container-todo{
+    width: 95%;
+  }
+  .container-todo p{
+    font-size: 10px;
+  }
+}

@@ -1,4 +1,6 @@
-<form #form="ngForm" (ngSubmit)="registra(form)">
+<section class="w-100 d-flex justify-content-center">
+  <div class="container-register">
+  <form #form="ngForm" (ngSubmit)="registra(form)">
   <div class="form-group">
     <label for="nome">Nome</label>
     <input type="text" id="nome" class="form-control" name="nome" required ngModel >
@@ -13,8 +15,11 @@
     <label for="password">Inserisci password</label>
     <input type="password" id="password" name="password" class="form-control" required ngModel>
   </div>
+  <div class="w-100 d-flex justify-content-center">
   <button type="submit" [disabled]="form.invalid" class="btn btn-primary mb-3">Registrati</button>
-  <!-- <div *ngIf="isLoading" class="d-flex justify-content-center mb-3">
+
+  </div>
+  <div *ngIf="isLoading" class="d-flex justify-content-center mb-3">
 
     <div class="spinner-grow text-warning spinner-grow-sm me-1" role="status">
       <span class="visually-hidden"></span>
@@ -35,5 +40,9 @@
   <ul>
     <li>{{errore}}</li>
   </ul>
-</div> -->
+</div>
  </form>
+</div>
+</section>
+
+

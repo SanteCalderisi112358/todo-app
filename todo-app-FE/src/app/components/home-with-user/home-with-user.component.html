@@ -1,21 +1,15 @@
-<div>
-  <div class="row">
-    <div class="col-xs-12 col-12 col-md-4 form-group">
-       <input class="input-getDate"  type="text"
-          placeholder="Seleziona una data"
-          class="form-control"
-          bsDatepicker
-          [bsConfig]="{ isAnimated: true, dateInputFormat: 'DD-MM-YYYY' }"
-          [(ngModel)]="selectedDate">
-          <button class="btn-getDate" (click)="getDate($event)">Aggiungi!</button>
-    </div>
-    <!-- <div class="col-xs-12 col-12 col-md-4 form-group">
-       <input type="text"
-          placeholder="Daterangepicker"
-          class="form-control"
-          bsDaterangepicker
+<div class="container-with-user">
+  <p style="text-align: center; width: 100%;">HOME-WITH-USER-LOGGED COMPONENT</p>
+  <div class="container-new-todo">
+    <app-new-todo>
 
-          [bsConfig]="{ isAnimated: true }">
-    </div> -->
- </div>
+    </app-new-todo>
+  </div>
+
+  <div class="container-todos">
+    <app-todos>
+
+    </app-todos>
+  </div>
+
 </div>

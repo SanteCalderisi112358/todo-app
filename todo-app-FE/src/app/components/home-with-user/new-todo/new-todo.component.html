@@ -1,0 +1,43 @@
+<div class="container-new-todo">
+  <p style="color: red;">NEW-TODO COMPONENT</p>
+  <form #loginform="ngForm" (ngSubmit)="onNewTodo(loginform)" class="needs-validation" novalidate>
+    <div class="mb-3">
+      <label for="decription" class="form-label">Descrizione</label>
+      <input type="text" id="decription" class="form-control" name="decription" required ngModel>
+      <div class="invalid-feedback">
+        Campo descrizione obbligatorio.
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="priorita" class="form-label">Priorità</label>
+      <div class="w-100 d-flex justify-content-center">
+        <select name="priorita" id="priorita" class="form-select w-50" required ngModel>
+        <option value="1">Bassa</option>
+        <option value="2">Media</option>
+        <option value="3">Alta</option>
+      </select>
+      </div>
+
+      <div class="invalid-feedback">
+        Seleziona una priorità.
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="date" class="form-label">Data</label>
+      <input class="form-control" name="date" type="text" placeholder="Seleziona una data" bsDatepicker [bsConfig]="{ isAnimated: true, dateInputFormat: 'DD-MM-YYYY' }" [(ngModel)]="selectedDate" required>
+    </div>
+    <div class="mb-3">
+      <label for="time" class="form-label">Orario</label>
+      <div class="w-100 d-flex justify-content-center">
+              <timepicker [(ngModel)]="selectedTime" name="time" [showMeridian]="false" [showSpinners]="false" required></timepicker>
+
+      </div>
+    </div>
+
+
+
+    <div class="d-flex justify-content-center">
+      <button class="btn btn-primary" type="submit" [disabled]="loginform.invalid">Aggiungi!</button>
+    </div>
+  </form>
+</div>
