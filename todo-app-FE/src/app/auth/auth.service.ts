@@ -5,15 +5,31 @@ import { User } from "../models/user.interface";
 import { AuthData } from "./auth-data.interface";
 import { BehaviorSubject, tap } from "rxjs";
 import { Router } from "@angular/router";
+import { JwtHelperService } from "@auth0/angular-jwt";
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService{
   baseUrl = environment.baseURL;
+  jwtHelper = new JwtHelperService();
+  timeLogout: any;
+
   private authSubj = new BehaviorSubject<null | AuthData>(null);
   user$ = this.authSubj.asObservable();
 user:AuthData | undefined;
+utenteLoggato:any;
+datiUtente: AuthData ={
+  accessToken: "",
+  user: {
+  email:"",
+  name:"",
+  last_name:"",
+  id:""
+  }
+}
+userProfile!: User;
+
   constructor(private http:HttpClient, private router:Router){}
 
   signup(data: {
@@ -29,14 +45,14 @@ user:AuthData | undefined;
     return this.http.post<AuthData>(`${this.baseUrl}auth/login`, data).pipe(
       tap((data: any) => {
         console.log(data);
-        // this.router.navigate(['/']);
+        this.router.navigate(['/']);
          this.authSubj.next(data);
-        // this.utente = data;
-        // console.log(this.utente);
+        this.user = data;
+        console.log(this.user);
         console.log(data)
         localStorage.setItem('utente', JSON.stringify(data));
-        // this.autologout(data);
-        // this.userProfile = data.utente;
+        this.autologout(data);
+        this.userProfile = data.utente;
       })
     );
   }
@@ -45,24 +61,37 @@ user:AuthData | undefined;
     this.authSubj.next(null);
     localStorage.removeItem('utente');
     this.router.navigate(['home-no-user']);
-
+    if (this.timeLogout) {
+      clearTimeout(this.timeLogout);
+    }
   }
 
   restore() {
-    let userFromLocalStorageStringify = localStorage.getItem('utente')
-   if (!userFromLocalStorageStringify) {
+    this.utenteLoggato = localStorage.getItem('utente');
+   if (!this.utenteLoggato) {
        return;
    }
-   this.user = JSON.parse(userFromLocalStorageStringify);
-   if (!this.user?.accessToken) {
+
+   this.datiUtente = JSON.parse(this.utenteLoggato);
+   if (this.jwtHelper.isTokenExpired(this.datiUtente.accessToken)) {
        this.logout;
    }
- if(this.user)
-     this.authSubj.next(this.user);
-  //    this.userProfile = this.datiUtente.utente;
-  //    this.autologout(this.datiUtente);
-
-  userFromLocalStorageStringify = ''
-  this.user = undefined
+   else {
+     this.authSubj.next(this.datiUtente);
+     this.userProfile = this.datiUtente.user;
+     this.autologout(this.datiUtente);
+   }
 }
+
+autologout(data: AuthData) {
+  const expirationDate = this.jwtHelper.getTokenExpirationDate(
+    data.accessToken
+  ) as Date;
+  const expirationMilliseconds =
+    expirationDate.getTime() - new Date().getTime();
+  this.timeLogout = setTimeout(() => {
+    this.logout();
+  }, expirationMilliseconds);
+}
+
 }

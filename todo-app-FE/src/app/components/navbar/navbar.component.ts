@@ -15,12 +15,7 @@ user!: AuthData|null
   ngOnInit(): void {
     this.autSrv.user$.subscribe((_user)=>{
       this.user= _user
-      if(this.user){
-        console.log(this.user.user)
 
-      }else{
-        console.log("Nessun si è loggato")
-      }
 
     })
   }

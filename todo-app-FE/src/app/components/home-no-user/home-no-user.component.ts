@@ -13,7 +13,10 @@ export class HomeNoUserComponent implements OnInit{
   subUser:Subscription | undefined
 constructor(private todoSrv: TodoService){}
   ngOnInit(): void {
-
+    // this.subUser = this.todoSrv.getAllUtenti().subscribe((response)=>{
+    //   this.allUser = response
+    //   console.log(this.allUser)
+    // })
   }
 
 }

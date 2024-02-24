@@ -17,6 +17,8 @@ import { TodosComponent } from './components/home-with-user/todos/todos.componen
 import { TodoComponent } from './components/home-with-user/todos/todo/todo.component';
 import { NewTodoComponent } from './components/home-with-user/new-todo/new-todo.component';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
+import { TokenInterceptor } from './auth/token.interceptor';
+
 
 const routes:Routes =[
  {
@@ -59,10 +61,16 @@ const routes:Routes =[
     BsDatepickerModule.forRoot(),
     FormsModule,
     HttpClientModule,
-    TimepickerModule.forRoot()
+    TimepickerModule.forRoot(),
 
   ],
-  providers: [BsDatepickerConfig],
+  providers: [BsDatepickerConfig,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
